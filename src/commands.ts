@@ -31,7 +31,7 @@ const init = (commandHandler: CommandHandler) => {
     }
 
     const query = args.join(" ");
-    const response = await eval(`await (() => ${query})()`);
+    const response = await eval(`(async () => ${query})()`);
 
     return m.channel.send("**EVAL RESPONSE:**\n\n```" + response + "```");
   });
