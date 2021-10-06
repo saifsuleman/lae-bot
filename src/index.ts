@@ -1,8 +1,7 @@
 import CommandHandler from "./commandhandler";
-import discord, { Intents, Message } from "discord.js";
-import SayCommand from "./commands/saycommand";
-import WeekCommand from "./commands/weekcommand";
+import discord, { Intents, Message, MessageEmbed } from "discord.js";
 import dotenv from "dotenv";
+import init from "./commands";
 
 export default class Bot extends discord.Client {
   commandHandler: CommandHandler;
@@ -27,6 +26,5 @@ export default class Bot extends discord.Client {
 
 dotenv.config();
 const bot = new Bot();
-bot.commandHandler.registerCommand(new SayCommand());
-bot.commandHandler.registerCommand(new WeekCommand());
+init(bot.commandHandler);
 bot.login(process.env["TOKEN"]);

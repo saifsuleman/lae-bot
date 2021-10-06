@@ -20,11 +20,15 @@ export default class CommandHandler {
     if (!this.commands.has(arr[0])) return;
 
     const command = this.commands.get(arr[0]);
-    return command!.exec(arr.slice(1, arr.length), message);
+    return command!.exec(message, arr.slice(1, arr.length));
   }
 
-  public registerCommand(command: ICommand) {
-    const { id } = command;
+  public registerCommand(
+    id: string,
+    exec: (m: Message, args: string[]) => Promise<any>
+  ) {
+    console.log(`Initializing command: ${id}`);
+    const command: ICommand = { id, exec };
     this.commands.set(id, command);
   }
 }
