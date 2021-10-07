@@ -32,8 +32,16 @@ const init = (commandHandler: CommandHandler) => {
 
     const query = args.join(" ");
     const response = await eval(`(async () => ${query})()`);
-
     return m.channel.send("**EVAL RESPONSE:**\n\n```" + response + "```");
+  });
+
+  commandHandler.registerCommand("expand", async (m, args) => {
+    const query = args.join(" ");
+    return new Promise((r) => {
+      require("axios")
+        .get("http://pulsarlabs.io:9001/api/binomial/expand/" + query)
+        .then((resp: { data: string }) => r(resp.data));
+    });
   });
 };
 
