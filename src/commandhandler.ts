@@ -20,6 +20,7 @@ export default class CommandHandler {
     if (!this.commands.has(arr[0])) return;
 
     const command = this.commands.get(arr[0]);
+    await message.delete();
     return command!.exec(message, arr.slice(1, arr.length));
   }
 
