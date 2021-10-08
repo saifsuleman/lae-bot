@@ -1,5 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import CommandHandler from "./commandhandler";
+import axios from "axios";
 
 const PYRO = "253934683996422145";
 
@@ -37,11 +38,9 @@ const init = (commandHandler: CommandHandler) => {
 
   commandHandler.registerCommand("expand", async (m, args) => {
     const query = args.join(" ");
-    return new Promise((r) => {
-      require("axios")
-        .get("http://pulsarlabs.io:9001/api/binomial/expand/" + query)
-        .then((resp: { data: string }) => r(resp.data));
-    });
+    axios
+      .get("http://pulsarlabs.io:9001/api/binomial/expand/" + query)
+      .then((resp: { data: string }) => m.channel.send(resp.data));
   });
 };
 
