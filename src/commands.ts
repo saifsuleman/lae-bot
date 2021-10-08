@@ -42,6 +42,8 @@ const init = (commandHandler: CommandHandler) => {
       .get("http://pulsarlabs.io:9001/api/binomial/expand/" + query)
       .then((resp: { data: string }) => m.channel.send(resp.data));
   });
+
+  commandHandler.registerCommand("unfort", (m) => m.channel.send(`unfort`));
 };
 
 export default init;
